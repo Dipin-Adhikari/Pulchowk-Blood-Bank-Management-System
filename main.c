@@ -33,7 +33,7 @@ void acceptor();
 int checkBlood(char bloodType[3]);
 void sendBloodRequest(char bloodType[3], int pint, char date[20], char time[20]);
 void saveRequestData(char bloodType[3], int pint, char date[20], char time[20]);
-char* upperString(char string[100]);
+
 
 int main() {
     int choice, loginOutput, signUpOutput;
@@ -60,7 +60,6 @@ int main() {
         default:
             printf("Invalid choice. Please try again.\n\n");
     }
-    // system("cls");
     if (loginOutput==1){
         printf("1. Request Blood\n");
         printf("2. Exit\n");
@@ -341,11 +340,4 @@ void saveRequestData(char bloodType[3], int pint, char date[20], char time[20]){
     fprintf(file, "%s %s %d %s %s\n", cUser.email, bloodType, pint, date, time);
 
     fclose(file);
-}
-
-char* upperString(char string[100]){
-    for(int i = 0; string[i]; i++){
-        string[i] = toupper(string[i]);
-    }
-    return string;
 }
