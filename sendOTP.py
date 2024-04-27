@@ -14,11 +14,11 @@ def main():
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        serverMail = '080bei015.dipin@pcampus.edu.np'
+        serverMail = 'bloodbankpulchowk@gmail.com'
         serverPass = os.getenv('gmailPass')
         server.login(serverMail, serverPass)
         message = MIMEMultipart()
-        message["From"] = serverPass
+        message["From"] = serverMail
         message["To"] = mailID
         message["Subject"] = "Pulchowk Blood Bank Verification Code"
         body = f"Verify your Pulchowk Blood Bank Email Address\n\nHi there,\nThank you for registering on Pulchowk Blood Bank Management System.\n\nWe want to make sure it's really you. Please enter the following verification code. If you didn't signup for Pulchowk Blood Bank, ignore this email.\n\nVerification Code: \n{otp}\n\nThis code will expire 10 minutes after it was sent.  "

@@ -18,11 +18,11 @@ def main():
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        serverMail = 'bloodbank.pcampus@gmail.com'
+        serverMail = 'bloodbankpulchowk@gmail.com'
         serverPass = os.getenv('gmailPass')
         server.login(serverMail, serverPass)
         message = MIMEMultipart()
-        message["From"] = serverPass
+        message["From"] = serverMail
         message["To"] = mailID
         message["Subject"] = f"{bloodType} blood Request"
         body = f"We need {pint} pint of {bloodType} blood on {date} at {time}. If you are available, then please contact us."

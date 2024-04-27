@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include <conio.h>
 
 struct User {
     char email[100];
@@ -78,16 +79,33 @@ int main() {
                 printf("Invalid choice. Please try again.\n\n");
         }
     }
-
+    getch();
     return 0;
 }
+
+
 int signup() {
     printf("Enter your email: ");
     scanf("%s", user.email);
     if (alreadySignupE(user.email) == 1){
         printf("Enter your password: ");
-        scanf("%s", user.password);
-        printf("Enter your name: ");
+        int i=0;
+        while (1) {
+            char ch = _getch();
+            if (ch == 13) {
+                user.password[i] = '\0';
+                break;
+            } else if (ch == 8) { 
+                if (i > 0) {
+                    printf("\b \b");
+                    i--;
+                }
+            } else {
+                user.password[i++] = ch;
+                printf("*");
+            }
+        }
+        printf("\nEnter your name: ");
         scanf(" %[^\n]", user.name);
         printf("Enter your roll number: ");
         scanf("%s", user.rollNo);
@@ -105,6 +123,7 @@ int signup() {
             }
             srand(time(NULL));
             int otp = rand() % 900000 + 100000;
+            sendMail(user.email, otp);
             printf("\nCheck your email for verification.");
             printf("\n\nEnter the verification code: ");
             int enteredCode=0;
@@ -139,9 +158,24 @@ int login() {
     printf("Enter your email: ");
     scanf("%s", email);
     printf("Enter your password: ");
-    scanf("%s", password);
+    int i=0;
+    while (1) {
+        char ch = _getch();
+        if (ch == 13) {
+            password[i] = '\0';
+            break;
+        } else if (ch == 8) { 
+            if (i > 0) {
+                printf("\b \b");
+                i--;
+            }
+        } else {
+            password[i++] = ch;
+            printf("*");
+        }
+    }
     if (checkEmailPassword(email, password) == 1){
-        printf("Login successful!\n\n");
+        printf("\nLogin successful!\n\n");
         strcpy(cUser.email, email);
         return 1;
     }
