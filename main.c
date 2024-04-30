@@ -76,7 +76,7 @@ int main() {
                 exit(0);
 
             default:
-                printf("Invalid choice. Please try again.\n\n");
+                printf("\nInvalid choice. Please try again.\n\n");
         }
     }
     getch();
@@ -114,7 +114,7 @@ int signup() {
             scanf("%d", &user.age);
             printf("Enter your gender: ");
             scanf("%s", user.gender);
-            printf("Enter your address: ");
+            printf("Enter your address(district): ");
             scanf("%s", user.address);
             printf("Enter your blood type: ");
             scanf("%s", user.blood_type);
@@ -321,10 +321,11 @@ int checkBlood(char bloodType[3]){
         exit(1);
     }
     while (fgets(line, sizeof(line), file)) {
-        char storedBloodType[3];
+        char storedBloodType[3], cEmail[100];
+        sscanf(line, "%s", cEmail);
         sscanf(line, "%*s%*s%*s%*s%*s%*s%*s%*s%s", storedBloodType);
 
-        if (strcmp(storedBloodType, bloodType) == 0 ) {
+        if (strcmp(storedBloodType, bloodType) == 0 && strcmp(cEmail, cUser.email) != 0) {
             
             fclose(file);
             return 1;
@@ -354,7 +355,6 @@ void sendBloodRequest(char bloodType[3], int pint, char date[20], char time[20])
             sprintf(command, "python sendRequest.py %s %s %d %s %s", email, bloodType, pint, date, time);
 
             system(command);
-            fclose(file);
         }
     }
 
